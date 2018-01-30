@@ -13,17 +13,19 @@ J = 0;
 % Instructions: Compute the cost of a particular choice of theta
 %               You should set J to the cost.
 
-m = length(X);
-prediction = X * theta;
-sub = 2 * m;
-tot = 0;
-for i=1:m
-  tot = tot + ((prediction(i) - y(i))^2);
-end;
+%prediction = X * theta;
+%sub = 2 * m;
+%tot = 0;
+%for i=1:m
+%  tot = tot + ((prediction(i) - y(i))^2);
+%end;
 
-J = tot / sub;
-disp(J);
+%J = tot / sub;
+%disp(J);
 
+% -----------------
+
+J = sum(((X * theta) - y) .^ 2) / (2 * m);
     
 % =========================================================================
 
