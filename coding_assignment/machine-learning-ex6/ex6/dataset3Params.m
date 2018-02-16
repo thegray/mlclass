@@ -22,11 +22,35 @@ sigma = 0.3;
 %  Note: You can compute the prediction error using 
 %        mean(double(predictions ~= yval))
 %
+minError = 1000;
+min_i = 0;
+min_j = 0;
+pv = [0.01; 0.03; 0.1; 0.3; 1; 3; 10; 30];
+maxloop = length(pv);
+curLoop = 1;
+for i = 1:maxloop
+    for j = 1:maxloop
+        fprintf('PBK training SVM No. %d \n', curLoop);
+        C = pv(i);
+        sigma = pv(j);
+        model = svmTrain(X, y, C, @(x1, x2) gaussianKernel(x1, x2, sigma));
+        predictions = svmPredict(model, Xval);
+        erVal = mean(double(predictions ~= yval));
+        if (erVal < minError)
+            fprintf('Error smaller found with val: %d \n', erVal);
+            minError = erVal;
+            min_i = i;
+            min_j = j;
+            fprintf('Value of i,j = (%d, %d) \nC, sigma = (%d, %d) \n', i, j, pv(i), pv(j));
+        endif
+        fprintf('PBK end of training \n---------------------- \n\n');
+        curLoop = curLoop + 1;
+    end
+end
 
-
-
-
-
+fprintf('Best combi value found: \nC = %d \nsigma = %d \n', pv(min_i), pv(min_j) );
+C = pv(min_i);
+sigma = pv(min_j);
 
 
 % =========================================================================

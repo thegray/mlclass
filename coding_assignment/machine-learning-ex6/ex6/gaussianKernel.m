@@ -16,7 +16,10 @@ sim = 0;
 %
 %
 
+dx = x1 .- x2; % vector diff of x1 and x2
+lendx = sum(dx .^ 2);
 
+sim = exp(-1 * (lendx / (2*(sigma^2) ) ) );
 
 
 
