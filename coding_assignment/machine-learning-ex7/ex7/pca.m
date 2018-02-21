@@ -20,7 +20,9 @@ S = zeros(n);
 %       number of examples).
 %
 
+Sigma = (1/m) * X' * X;            %' Sigma is covariance matrix n x n size
 
+[U, S, V] = svd(Sigma);
 
 
 
