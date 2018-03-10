@@ -1,0 +1,3 @@
+octave tutorial
+basic
+vectorized implementation
